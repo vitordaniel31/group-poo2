@@ -26,23 +26,29 @@ class DashboardView extends StatelessWidget {
       body: BlocBuilder<DashboardCubit, List<Character>>(
         builder: (context, characterList) {
           if (characterList.isNotEmpty) {
-            return ListView.builder(
-              itemCount: characterList.length,
-              itemBuilder: (context, index) {
-                final character = characterList[index];
-                return ListTile(
-                  leading: Image.network(
-                    'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${character.id}_0.jpg',
-                    width: 150,
-                    height: 150,
-                  ),
-                  title: Text(character.name),
-                  subtitle: Text(character.title),
-                  trailing: Text(character.blurb.length > 200
-                      ? '${character.blurb.substring(0, 200)}...'
-                      : character.blurb),
-                );
-              },
+            return SingleChildScrollView(
+              child: DataTable(
+                dataRowMaxHeight: 100,
+                columns: const [
+                  DataColumn(label: Text('Nome')),
+                  DataColumn(label: Text('Imagem')),
+                  DataColumn(label: Text('Ações')),
+                ],
+                rows: characterList.map((character) {
+                  return DataRow(
+                    cells: [
+                      DataCell(Text(character.name)),
+                      DataCell(
+                        Image.network(
+                          character.image,
+                          height: 80,
+                        ),
+                      ),
+                      const DataCell(Text('Detalhar')),
+                    ],
+                  );
+                }).toList(),
+              ),
             );
           } else {
             return const Center(child: CircularProgressIndicator());
