@@ -1,4 +1,4 @@
-import 'package:chargames/counter/counter.dart';
+import 'package:chargames/dashboard/view/dashboard_page.dart';
 import 'package:chargames/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +9,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+        appBarTheme: const AppBarTheme(color: Color(0xFF8A2BE2)),
         colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
+          accentColor: const Color(0xFF8A2BE2),
         ),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const DashboardPage(),
     );
   }
 }
