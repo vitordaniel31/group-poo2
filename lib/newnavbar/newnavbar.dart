@@ -1,1 +1,0 @@
-export 'view/newnavbar.dart';
