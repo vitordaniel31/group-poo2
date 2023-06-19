@@ -48,8 +48,11 @@ class DashboardView extends StatelessWidget {
                       DataCell(
                         TextButton(
                           onPressed: () {
-                            DetailCubit().fetchCharacter(character.id);
-                            Navigator.pushNamed(context, '/detail');
+                            Navigator.pushNamed(
+                              context,
+                              '/detail',
+                              arguments: {'id': character.id},
+                            );
                           },
                           style: ButtonStyle(
                             backgroundColor:

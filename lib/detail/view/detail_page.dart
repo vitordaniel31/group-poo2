@@ -9,8 +9,14 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments;
+    var id = 0;
+    if (args is Map<String, dynamic>) {
+      id = args['id'] as int;
+    }
+
     return BlocProvider(
-      create: (_) => DetailCubit(),
+      create: (_) => DetailCubit(id: id)..fetchCharacter(),
       child: const DetailView(),
     );
   }
