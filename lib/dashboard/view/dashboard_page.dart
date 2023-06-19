@@ -1,4 +1,5 @@
 import 'package:chargames/dashboard/dashboard.dart';
+import 'package:chargames/detail/cubit/detail_cubit.dart';
 import 'package:chargames/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +45,21 @@ class DashboardView extends StatelessWidget {
                           height: 80,
                         ),
                       ),
-                      const DataCell(Text('Detalhar')),
+                      DataCell(
+                        TextButton(
+                          onPressed: () {
+                            DetailCubit().fetchCharacter(character.id);
+                            Navigator.pushNamed(context, '/detail');
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.blue),
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                          ),
+                          child: const Text('Detalhar'),
+                        ),
+                      ),
                     ],
                   );
                 }).toList(),

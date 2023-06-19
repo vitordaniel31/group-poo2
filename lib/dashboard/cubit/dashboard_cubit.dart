@@ -5,16 +5,16 @@ import 'package:http/http.dart' as http;
 
 class Character {
   Character({
-    required this.id,
-    required this.name,
-    required this.image,
+    this.id = 0,
+    this.name = '',
+    this.image = '',
   });
 
   factory Character.fromJson(Map<String, dynamic> json) {
     return Character(
       id: json['id'] as int,
       name: utf8.decode(json['name'].toString().codeUnits),
-      image: json['image'] as String,
+      image: (json.containsKey('image') ? json['image'] : '') as String,
     );
   }
 

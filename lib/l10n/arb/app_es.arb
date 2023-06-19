@@ -7,5 +7,9 @@
     "dashboardAppBarTitle": "Dashboard",
     "@dashboardAppBarTitle": {
         "description": "Texto mostrado en la AppBar de la página del dashboard"
+    },
+    "detailAppBarTitle": "Detail",
+    "@detailAppBarTitle": {
+        "description": "Texto mostrado en la AppBar de la página del detail"
     }
 }

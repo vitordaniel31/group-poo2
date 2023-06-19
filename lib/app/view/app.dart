@@ -1,4 +1,5 @@
 import 'package:chargames/dashboard/view/dashboard_page.dart';
+import 'package:chargames/detail/view/detail_page.dart';
 import 'package:chargames/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,11 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const DashboardPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const DashboardPage(),
+        '/detail': (context) => const DetailPage(),
+      },
     );
   }
 }
