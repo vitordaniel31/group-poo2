@@ -23,10 +23,12 @@ class Character {
   final String image;
 }
 
+List<Character> perOriginal = [];
+
 class DashboardCubit extends Cubit<List<Character>> {
   DashboardCubit() : super([]);
 
-  Future<void> fetchCharacters() async {
+  Future<void> fetchCharacters(String search) async {
     try {
       final response = await http.get(
         Uri.parse('https://www.digi-api.com/api/v1/digimon?pageSize=20'),
@@ -40,8 +42,13 @@ class DashboardCubit extends Cubit<List<Character>> {
             .map(
               (dynamic characterJson) =>
                   Character.fromJson(characterJson as Map<String, dynamic>),
-            )
-            .toList();
+            ).where((character) {
+              final searchLowerCase = search.toLowerCase();
+              return searchLowerCase.isEmpty || 
+              (character.id.toString().toLowerCase().contains(searchLowerCase) 
+              || character.name.toLowerCase().contains(searchLowerCase)
+              );
+            },).toList();
 
         emit(fetchedCharacters);
       } else {
