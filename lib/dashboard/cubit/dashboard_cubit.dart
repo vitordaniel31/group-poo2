@@ -23,10 +23,10 @@ class Character {
   final String image;
 }
 
-List<Character> characters = [];
-
 class DashboardCubit extends Cubit<List<Character>> {
   DashboardCubit() : super([]);
+
+  List<Character> characters = [];
 
   int pageSize = 20;
   int currentPage = 1;
@@ -56,9 +56,12 @@ class DashboardCubit extends Cubit<List<Character>> {
             characters.clear();
           }
 
-          characters.addAll(fetchedCharacters);
+          final updatedCharacters = List<Character>.from(characters);
+          updatedCharacters.addAll(fetchedCharacters);
 
-          emit(fetchedCharacters);
+          characters = updatedCharacters;
+
+          filterCharacters(search);
         }
       } else {
         throw Exception('Failed to fetch characters');
