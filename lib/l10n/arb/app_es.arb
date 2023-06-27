@@ -1,8 +1,8 @@
 {
     "@@locale": "es",
-    "counterAppBarTitle": "Contador",
-    "@counterAppBarTitle": {
-        "description": "Texto mostrado en la AppBar de la página del contador"
+    "authorAppBarTitle": "Autor",
+    "@authorAppBarTitle": {
+        "description": "Texto mostrado en la AppBar de la página del autor"
     },
     "dashboardAppBarTitle": "Dashboard",
     "@dashboardAppBarTitle": {

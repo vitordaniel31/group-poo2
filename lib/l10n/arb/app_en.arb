@@ -1,8 +1,8 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "authorAppBarTitle": "Author",
+    "@authorAppBarTitle": {
+        "description": "Text shown in the AppBar of the Author Page"
     },
     "dashboardAppBarTitle": "Dashboard",
     "@dashboardAppBarTitle": {

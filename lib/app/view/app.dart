@@ -1,3 +1,4 @@
+import 'package:chargames/author/author.dart';
 import 'package:chargames/dashboard/view/dashboard_page.dart';
 import 'package:chargames/detail/view/detail_page.dart';
 import 'package:chargames/l10n/l10n.dart';
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
       routes: {
         '/': (context) => const DashboardPage(),
         '/detail': (context) => const DetailPage(),
+        '/authors': (context) => const AuthorPage(),
       },
     );
   }
