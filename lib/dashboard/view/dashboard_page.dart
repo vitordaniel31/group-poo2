@@ -106,6 +106,25 @@ class DashboardView extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index){
+          if (index == 0){
+            Navigator.pushNamed(context, '/dashboard');
+          } else if (index == 1){
+            Navigator.pushNamed(context, '/authors');
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Autores',
+          ),
+        ],
+      ),
     );
   }
 }
