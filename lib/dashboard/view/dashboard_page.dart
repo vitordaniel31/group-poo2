@@ -109,7 +109,7 @@ class DashboardView extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index){
           if (index == 0){
-            Navigator.pushNamed(context, '/dashboard');
+            Navigator.pushNamed(context, '/');
           } else if (index == 1){
             Navigator.pushNamed(context, '/authors');
           }
