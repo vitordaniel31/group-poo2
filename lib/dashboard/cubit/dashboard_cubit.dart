@@ -8,19 +8,43 @@ class Character {
     this.id = 0,
     this.name = '',
     this.image = '',
+    this.description = '',
   });
 
   factory Character.fromJson(Map<String, dynamic> json) {
+    var image = '';
+    var description = '';
+
+    if (json.containsKey('image')) {
+      image = json['image'] as String;
+    } else if (json.containsKey('images')) {
+      final firstImage = (json['images'] as List<dynamic>)[0];
+      if (firstImage is Map<String, dynamic> &&
+          firstImage.containsKey('href')) {
+        image = firstImage['href'] as String;
+      }
+    }
+
+    if (json.containsKey('descriptions')) {
+      final firstDescription = (json['descriptions'] as List<dynamic>)[1];
+      if (firstDescription is Map<String, dynamic> &&
+          firstDescription.containsKey('description')) {
+        description = firstDescription['description'] as String;
+      }
+    }
+
     return Character(
       id: json['id'] as int,
       name: utf8.decode(json['name'].toString().codeUnits),
-      image: (json.containsKey('image') ? json['image'] : '') as String,
+      image: image,
+      description: utf8.decode(description.codeUnits),
     );
   }
 
   final int id;
   final String name;
   final String image;
+  final String description;
 }
 
 class DashboardCubit extends Cubit<List<Character>> {

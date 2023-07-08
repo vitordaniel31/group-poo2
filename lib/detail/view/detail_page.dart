@@ -23,22 +23,69 @@ class DetailPage extends StatelessWidget {
 }
 
 class DetailView extends StatelessWidget {
-  const DetailView({super.key});
+  const DetailView({Key? key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.detailAppBarTitle)),
-      body: BlocBuilder<DetailCubit, Character>(
-        builder: (context, character) {
-          character = context.select((DetailCubit cubit) => cubit.state);
-          if (character.id != 0) {
-            return Text(character.name);
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              BlocBuilder<DetailCubit, Character>(
+                builder: (context, character) {
+                  character =
+                      context.select((DetailCubit cubit) => cubit.state);
+                  if (character.id != 0) {
+                    return SingleChildScrollView(
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 8),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Image.network(
+                                  character.image,
+                                  width: 150,
+                                  height: 150,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                character.name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Roboto',
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                character.description,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Roboto',
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -49,15 +49,15 @@ class AuthorPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Autores do Projeto'),
       ),
-      body: ListView.builder(
-        itemCount: authors.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8),
-            child: AuthorCard(author: authors[index]),
-          );
-        },
-      ),
+        body: ListView.builder(
+          itemCount: authors.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8),
+              child: AuthorCard(author: authors[index]),
+            );
+          },
+        ),
     );
   }
 }

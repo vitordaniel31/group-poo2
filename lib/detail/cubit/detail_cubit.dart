@@ -10,19 +10,21 @@ class DetailCubit extends Cubit<Character> {
 
   Future<void> fetchCharacter() async {
     try {
-      final response = await http.get(
-        Uri.parse('https://www.digi-api.com/api/v1/digimon/${id}'),
-      );
+      if (id != 0) {
+        final response = await http.get(
+          Uri.parse('https://www.digi-api.com/api/v1/digimon/$id'),
+        );
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
 
-        final fetchedCharacter =
-            Character.fromJson(data as Map<String, dynamic>);
+          final fetchedCharacter =
+              Character.fromJson(data as Map<String, dynamic>);
 
-        emit(fetchedCharacter);
-      } else {
-        throw Exception('Failed to fetch characters');
+          emit(fetchedCharacter);
+        } else {
+          throw Exception('Failed to fetch characters');
+        }
       }
     } catch (error) {
       throw Exception('Failed to fetch champions: $error');
