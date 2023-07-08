@@ -9,11 +9,20 @@ class Character {
     this.name = '',
     this.image = '',
     this.description = '',
+    this.releaseDate = '',
+    this.type = '',
+    this.fields = '',
+    this.priorEvolutions = const [],
+    this.nextEvolutions = const [],
   });
 
   factory Character.fromJson(Map<String, dynamic> json) {
     var image = '';
     var description = '';
+    var type = '';
+    var fields = '';
+    final priorData = json['priorEvolutions'] as List<dynamic>?;
+    final nextData = json['nextEvolutions'] as List<dynamic>?;
 
     if (json.containsKey('image')) {
       image = json['image'] as String;
@@ -33,11 +42,42 @@ class Character {
       }
     }
 
+    if (json.containsKey('types')) {
+      final firstType = (json['types'] as List<dynamic>)[0];
+      if (firstType is Map<String, dynamic> && firstType.containsKey('type')) {
+        type = firstType['type'] as String;
+      }
+    }
+
+    if (json.containsKey('fields')) {
+      for (var field in json['fields'] as List) {
+        field = field['field'];
+        fields = '$fields$field, ';
+      }
+
+      if (fields.endsWith(', ')) {
+        fields = fields.substring(0, fields.length - 2);
+      }
+    }
+
+    final priorEvolutions = priorData != null
+        ? List<Map<String, dynamic>>.from(priorData)
+        : <Map<String, dynamic>>[];
+
+    final nextEvolutions = nextData != null
+        ? List<Map<String, dynamic>>.from(nextData)
+        : <Map<String, dynamic>>[];
+
     return Character(
       id: json['id'] as int,
       name: utf8.decode(json['name'].toString().codeUnits),
       image: image,
       description: utf8.decode(description.codeUnits),
+      releaseDate: utf8.decode(json['releaseDate'].toString().codeUnits),
+      type: utf8.decode(type.codeUnits),
+      fields: fields,
+      priorEvolutions: priorEvolutions,
+      nextEvolutions: nextEvolutions,
     );
   }
 
@@ -45,6 +85,11 @@ class Character {
   final String name;
   final String image;
   final String description;
+  final String releaseDate;
+  final String type;
+  final String fields;
+  final List<Map<String, dynamic>> priorEvolutions;
+  final List<Map<String, dynamic>> nextEvolutions;
 }
 
 class DashboardCubit extends Cubit<List<Character>> {
