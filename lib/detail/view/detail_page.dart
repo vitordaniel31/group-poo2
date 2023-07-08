@@ -24,24 +24,6 @@ class DetailPage extends StatelessWidget {
   }
 }
 
-DataRow buildDataRow(String label, String value) {
-  return DataRow(
-    cells: [
-      DataCell(
-        Text(
-          label,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      DataCell(
-        Text(value),
-      ),
-    ],
-  );
-}
-
 class DetailView extends StatelessWidget {
   const DetailView({super.key});
   
@@ -59,43 +41,93 @@ class DetailView extends StatelessWidget {
           if (character.id != 0) {
             return ListView(
                     children: [
-                      Container(
-                        color: Color.fromARGB(255, 116, 59, 223), // Defina a cor de fundo desejada aqui
-                        child: Text(
-                          character.name
-                          ,
-                          style: TextStyle(
-                            fontSize: 40,
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                          ),
-                        ),
-                      ),
                       Image.network(
                         character.href,
                         height: 300,
                       ),
                       DataTable(
                         columns: const [
-                          DataColumn(label: Text('About digimon:')),
-                          DataColumn(label: Text(' ')),
+                          DataColumn(label: Text('Sobre o Digimon:')),
                         ],
                         rows: [
-                          buildDataRow('Release Date:', character.criacao),
-                          buildDataRow('Type:', character.type),
-                          buildDataRow('Fields:', character.fields),
-                          buildDataRow('Description:', character.descricao),
+                            DataRow(
+                              cells: [
+                                DataCell(
+                                  Text('Name: ${character.name}'),
+                                ),
+                              ],
+                            ),
+                            DataRow(
+                              cells: [
+                                DataCell(
+                                  Text('Release Date: ${character.criacao}'),
+                                ),
+                              ],
+                            ),
+                            DataRow(
+                              cells: [
+                                DataCell(
+                                  Text('Type: ${character.type}'),
+                                ),
+                              ],
+                            ),
+                            DataRow(
+                              cells: [
+                                DataCell(
+                                  Text('Fields: ${character.fields}'),
+                                ),
+                              ],
+                            ),
+                            DataRow(
+                              cells: [
+                                DataCell(
+                                  Text('Description: ${character.descricao}'),
+                                ),
+                              ],
+                            ),
                         ],
-                        dataRowColor: MaterialStateColor.resolveWith((states) {
-                          if (states.contains(MaterialState.selected)) {
-                            return Colors.grey
-                                .withOpacity(0.5); // Cor de fundo quando selecionada
-                          }
-                          return Colors.transparent; // Cor de fundo padrão
-                        }),
-                        dataTextStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.0,
+                      ),
+                      // Row(
+                      //   children: [
+                      //     Text('Level: '),
+                      //     for (var level in character.levels)
+                      //     Text(level['level'] as String),
+                      //   ],
+                      // ),
+
+                      // Row(
+                      //   children: [
+                      //     Text('Attributes: '),
+                      //     for (var att in character.atributos)
+                      //       Text(att['attribute'] as String ),
+                      //   ],
+                      // ),
+                      // ignore: use_colored_box
+                      Container(
+                        color: Color.fromARGB(255, 112, 63, 248), // Defina a cor de fundo desejada aqui
+                        child: Text(
+                          'Skills',
+                          style: TextStyle(
+                            fontSize: 40,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                          ),
                         ),
+                      ),
+
+                      DataTable(
+                        columns: const [
+                          DataColumn(label: Text('Name')),
+                          DataColumn(label: Text('Name Inglish')),
+                          DataColumn(label: Text('Description')),
+                        ],
+                        rows: [
+                          for (var skill in character.skills)
+                          DataRow(cells: [
+                            DataCell(Text(skill['skill'] as String),),
+                            DataCell(Text(skill['translation'] as String),),
+                            DataCell(Text(skill['description'] as String),),
+                            ],),
+                        ],
                       ),
 
                       Container(
@@ -220,6 +252,97 @@ class DetailView extends StatelessWidget {
                         }).toList(),
                       ),
 
+                      // DataTable(
+                      //   columns: const [
+                      //     DataColumn(label: Text('Name')),
+                      //     DataColumn(label: Text('Condition')),
+                      //     DataColumn(label: Text('Image')),
+                      //     DataColumn(label: Text('Ver')),
+                      //   ],
+                      //   rows: [
+                      //     for (var prior in character.priorEvolutions)
+                      //       DataRow(
+                      //         cells: [
+                      //           DataCell(
+                      //             Text(prior['digimon'] as String),
+                      //           ),
+                      //           DataCell(
+                      //             Text(prior['condition'] as String),
+                      //           ),
+                      //           DataCell(
+                      //             Image.network(
+                      //             prior['image'] as String,
+                      //             height: 80,
+                      //           ),
+                      //           ),
+                      //           DataCell(
+                      //             TextButton(
+                      //               onPressed: () {
+                      //                 Navigator.pushNamed(
+                      //                   context,
+                      //                   '/detail',
+                      //                   arguments: {'id': prior['id'] as int},
+                      //                 );
+                      //               },
+                      //               style: ButtonStyle(
+                      //                 backgroundColor:
+                      //                     MaterialStateProperty.all<Color>(Colors.blue),
+                      //                 foregroundColor: MaterialStateProperty.all<Color>(
+                      //                     Colors.white),
+                      //               ),
+                      //               child: const Text('Ver'),
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ],
+                      //   ),
+
+                      //   DataTable(
+                      //     columns: const [
+                      //       DataColumn(label: Text('Name')),
+                      //       DataColumn(label: Text('Condition')),
+                      //       DataColumn(label: Text('Image')),
+                      //       DataColumn(label: Text('Ver')),
+                      //     ],
+                      //     rows: [
+                      //       for (var next in character.nextEvolutions)
+                      //         DataRow(
+                      //           cells: [
+                      //             DataCell(
+                      //               Text(next['digimon'] as String),
+                      //             ),
+                      //             DataCell(
+                      //               Text(next['condition'] as String),
+                      //             ),
+                      //             DataCell(
+                      //               Image.network(
+                      //                 next['image'] as String,
+                      //                 height: 80,
+                      //               ),
+                      //             ),
+                      //             DataCell(
+                      //               TextButton(
+                      //                 onPressed: () {
+                      //                   Navigator.pushNamed(
+                      //                     context,
+                      //                     '/detail',
+                      //                     arguments: {'id': next['id'] as int},
+                      //                   );
+                      //                 },
+                      //                 style: ButtonStyle(
+                      //                   backgroundColor:
+                      //                       MaterialStateProperty.all<Color>(Colors.blue),
+                      //                   foregroundColor: MaterialStateProperty.all<Color>(
+                      //                       Colors.white),
+                      //                 ),
+                      //                 child: const Text('Ver'),
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //     ],
+                      //   ),
 
                     ]
                   );
