@@ -98,7 +98,7 @@ class DashboardCubit extends Cubit<List<Character>> {
   List<Character> characters = [];
 
   int pageSize = 20;
-  int currentPage = 1;
+  int currentPage = 0;
   int totalPages = 1;
 
   Future<void> fetchCharacters(String search) async {
